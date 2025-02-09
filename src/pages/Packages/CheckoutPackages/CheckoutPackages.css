@@ -1,0 +1,56 @@
+.checkout-package__title h2,
+.checkout-package__title h4 {
+	white-space: normal;
+}
+.pack__name {
+	font-size: 18px;
+	font-weight: 500;
+	white-space: normal;
+}
+.change__package_btn {
+	all: unset;
+	text-decoration: underline;
+	color: var(--second-500);
+}
+.coupon_box {
+	margin-right: 8px;
+	padding: 4px 6px;
+	background-color: #efefef;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-ms-border-radius: 10px;
+	-o-border-radius: 10px;
+}
+.cancel_coupon__icon {
+	cursor: pointer;
+	margin-right: 6px;
+	width: 20px;
+	height: 20px;
+}
+
+.cancel_coupon__icon:hover .close__coupon_icon {
+	color: inherit;
+}
+
+.cancel_coupon__icon .close__coupon_icon {
+	width: 18px;
+	height: 18px;
+	color: #ccc;
+}
+
+@media (max-width: 768px) {
+	.checkout-package__title h2 {
+		font-size: 26px;
+		line-height: 30px;
+		margin-bottom: 12px;
+	}
+	.checkout-package__title h4 {
+		font-size: 20px;
+	}
+
+	.pack__name {
+		font-size: 16px;
+		font-weight: 400;
+	}
+}
