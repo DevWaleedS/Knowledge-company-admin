@@ -118,18 +118,6 @@ export const productsApi = createApi({
 			invalidatesTags: ["Products"],
 		}),
 
-		// change Categories For Some Selected Products
-		changeCategoriesForSomeSelectedProducts: builder.mutation({
-			query: ({ queryParams, body }) => {
-				return {
-					url: `updateCategory?${queryParams}`,
-					method: "POST",
-					data: body,
-				};
-			},
-			invalidatesTags: ["Products"],
-		}),
-
 		//add new Product
 		addNewProduct: builder.mutation({
 			query: ({ body }) => {
@@ -191,7 +179,7 @@ export const {
 	useSearchInImportedProductsMutation,
 	useFilterStoreProductsByCategoriesMutation,
 	useFilterImportedProductsByCategoriesMutation,
-	useChangeCategoriesForSomeSelectedProductsMutation,
+
 	useGetProductByIdQuery,
 	useEditProductByIdMutation,
 	useEditImportProductByIdMutation,

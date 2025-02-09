@@ -265,7 +265,7 @@ const CreateNewPassword = () => {
 						<SvgComponent />
 					</span>
 					<div className='info-svg'>
-						<h4>منصة المعرفة للعمل عن بُعد </h4>
+						<h4>شركة المعرفة البرمجية لتقنية المعلومات</h4>
 						<h1> مرحباً بعودتك</h1>
 					</div>
 				</div>

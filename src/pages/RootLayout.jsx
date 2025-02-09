@@ -19,7 +19,7 @@ import { Outlet, ScrollRestoration } from "react-router-dom";
 import TopBar from "../global/TopBar/TopBar";
 
 // App Modal
-import MaintenanceMode from "./MaintenanceMode";
+
 import { PackagePeriodAlert, VerifayStoreAlert } from "../components/Modal";
 import { VerifayAfterMainInfoAlert } from "../components/Modal";
 import { DelegateRequestAlert, VerifyStoreModal } from "../components/Modal";
@@ -55,11 +55,6 @@ const RootLayout = () => {
 
 	// To handle Open Verify Modal
 	const { isOpenVerifyModal } = useSelector((state) => state.VerifyModal);
-
-	// Open Maintenance Mode Modal
-	const { isOpenMaintenanceModeModal } = useSelector(
-		(state) => state.MaintenanceModeModal
-	);
 
 	// Open Verify Store Modal
 	const { isVerifyStoreAlertOpen } = useSelector(
@@ -115,7 +110,7 @@ const RootLayout = () => {
 							)}
 
 							{isVerifyStoreAlertOpen && <VerifayStoreAlert />}
-							{isOpenMaintenanceModeModal && <MaintenanceMode />}
+
 							{isVerifyAfterMainOpen && <VerifayAfterMainInfoAlert />}
 							{/** Delegate Request Alert */}
 							<DelegateRequestAlert />

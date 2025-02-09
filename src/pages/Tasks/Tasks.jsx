@@ -14,7 +14,7 @@ import SearchInCategories from "./SearchInTasks";
 const Tasks = () => {
 	const [search, setSearch] = useState("");
 	const [categoriesData, setCategoriesData] = useState([]);
-	const [tabSelected, setTabSelected] = useState(1);
+
 	const [pageTarget, setPageTarget] = useState(1);
 	const [rowsCount, setRowsCount] = useState(10);
 	const [currentPage, setCurrentPage] = useState(1);
@@ -39,14 +39,14 @@ const Tasks = () => {
 	return (
 		<>
 			<Helmet>
-				<title>لوحة تحكم المعرفة | الأنشطة</title>
+				<title>لوحة تحكم المعرفة | إدارة المهام</title>
 			</Helmet>
 			<div className='Tasks p-lg-3'>
-				<Breadcrumb currentPage={"الأنشطة"} />
+				<Breadcrumb currentPage={"إدارة المهام"} />
 
 				<div className='mb-3'>
 					<PageHint
-						hint={`سوف تظهر هذه الأنشطة بمجرد استخدامها في اضافة المنتجات الخاصة بك`}
+						hint={`من خلال هذا القسم تستطع إدارة مهام الموظفين  `}
 						flex={"d-flex  justify-content-start align-items-center gap-2"}
 					/>
 
@@ -55,7 +55,6 @@ const Tasks = () => {
 							search={search}
 							setSearch={setSearch}
 							categories={categories}
-							tabSelected={tabSelected}
 							setPageCount={setPageCount}
 							setPageTarget={setPageTarget}
 							setCurrentPage={setCurrentPage}
@@ -63,20 +62,7 @@ const Tasks = () => {
 						/>
 					</div>
 				</div>
-				<div className='filters-btn'>
-					<button
-						className={`btn ${tabSelected === 1 ? "active" : ""}`}
-						onClick={() => {
-							setTabSelected(1);
-						}}>
-						أنشطة التاجر
-					</button>
-					<button
-						className={`btn ${tabSelected !== 1 ? "active" : ""}`}
-						onClick={() => setTabSelected(2)}>
-						أنشطة شركة المعرفة
-					</button>
-				</div>
+
 				<div className='row'>
 					<div className='Tasks-table'>
 						<TasksTable
@@ -84,7 +70,6 @@ const Tasks = () => {
 							rowsCount={rowsCount}
 							setRowsCount={setRowsCount}
 							pageTarget={pageTarget}
-							tabSelectedId={tabSelected}
 							categories={categoriesData || []}
 							setPageTarget={setPageTarget}
 							pageCount={pageCount}

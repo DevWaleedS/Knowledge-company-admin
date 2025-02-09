@@ -6,7 +6,7 @@ import AddSubActivity from "./slices/AddSubActivity";
 import VideoModalSlice from "./slices/VideoModal-slice";
 import ReplyModalSlice from "./slices/ReplyModal-slice";
 import AddSubCategorySlice from "./slices/AddSubCategory-slice";
-import MaintenanceModeModal from "./slices/MaintenanceModeModal";
+
 import ImportProductHintModal from "./slices/ImportProductHintModal";
 import VerifyStoreModalSlice from "./slices/VerifyStoreModal-slice";
 import DelegateRequestAlert from "./slices/DelegateRequestAlert-slice";
@@ -17,14 +17,14 @@ import EditBankAccountModal from "./slices/EditBankAccountModal";
 
 import BankAccStatusCommentModal from "./slices/BankAccStatusCommentModal";
 import BankAccountAlert from "./slices/BankAccountAlert";
-import CategoriesSlice from "./slices/CategoriesSlice";
+
 import ProductsSlice from "./slices/ProductsSlice";
 
 import { mainPageApi } from "./apiSlices/mainPageApi";
 import { categoriesApi } from "./apiSlices/categoriesApi";
 
 import { productsApi } from "./apiSlices/productsApi";
-import ChangeCategoriesForSomeSelectedProductsSlice from "./slices/ChangeCategoriesForSomeSelectedProducts";
+
 import { ordersApi } from "./apiSlices/ordersApiSlices/ordersApi";
 import { returnOrdersApi } from "./apiSlices/ordersApiSlices/returnOrdersApi";
 import { loginApi } from "./apiSlices/loginApi";
@@ -58,7 +58,7 @@ import { walletApi } from "./apiSlices/walletApi";
 import { selectBanksApi } from "./apiSlices/selectorsApis/selectBanksApi";
 import { mainInformationApi } from "./apiSlices/mainInformationApi";
 import { selectCountriesApi } from "./apiSlices/selectorsApis/selectCountriesApi";
-import { maintenanceModeApi } from "./apiSlices/maintenanceModeApi";
+
 import { reportsApi } from "./apiSlices/reportsApi";
 import { evaluationThePlatformApi } from "./apiSlices/evaluationThePlatformApi";
 import { editUserDetailsApi } from "./apiSlices/editUserDetailsApi";
@@ -106,7 +106,7 @@ export const store = configureStore({
 			mainInformationApi.middleware,
 			selectCountriesApi.middleware,
 			selectPeriodTypesApi.middleware,
-			maintenanceModeApi.middleware,
+
 			paymentGatewaysApi.middleware,
 			templateSettingApi.middleware,
 			requestDelegateApi.middleware,
@@ -158,7 +158,7 @@ export const store = configureStore({
 		[notificationsApi.reducerPath]: notificationsApi.reducer,
 		[defaultAddressApi.reducerPath]: defaultAddressApi.reducer,
 		[upgradePackagesApi.reducerPath]: upgradePackagesApi.reducer,
-		[maintenanceModeApi.reducerPath]: maintenanceModeApi.reducer,
+
 		[selectCountriesApi.reducerPath]: selectCountriesApi.reducer,
 		[templateSettingApi.reducerPath]: templateSettingApi.reducer,
 		[paymentGatewaysApi.reducerPath]: paymentGatewaysApi.reducer,
@@ -188,7 +188,7 @@ export const store = configureStore({
 		AddSubActivity: AddSubActivity,
 		VerifyModal: VerifyStoreModalSlice,
 		AddSubCategorySlice: AddSubCategorySlice,
-		MaintenanceModeModal: MaintenanceModeModal,
+
 		DelegateRequestAlert: DelegateRequestAlert,
 		AddBankAccountModal: AddBankAccountModal,
 		EditBankAccountModal: EditBankAccountModal,
@@ -197,10 +197,8 @@ export const store = configureStore({
 		VerifyAfterMainModal: VerifyStoreAlertAfterMainModalSlice,
 		BankAccStatusCommentModal,
 		BankAccountAlert,
-		CategoriesSlice,
-		ProductsSlice,
 
-		ChangeCategoriesForSomeSelectedProductsSlice,
+		ProductsSlice,
 	},
 });
 

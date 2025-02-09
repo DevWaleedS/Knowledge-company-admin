@@ -4,19 +4,15 @@ import React, { useContext, useState } from "react";
 import { Helmet } from "react-helmet";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ImageUploading from "react-images-uploading";
 
 // Context
 import Context from "../../Context/context";
 import { LoadingContext } from "../../Context/LoadingProvider";
 
-// Components
-import AddSubTasks from "../nestedPages/AddSubTasks";
-
 // Redux
 import { useDispatch, useSelector } from "react-redux";
-import { openAddSubTasks } from "../../store/slices/AddSubTasks-slice";
 
 // MUI
 import Box from "@mui/material/Box";
@@ -27,7 +23,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { DeleteIcon, UploadIcon } from "../../data/Icons";
 
 // RTK Query
-import { useAddNewTasksMutation } from "../../store/apiSlices/categoriesApi";
+import { useAddNewCategoryMutation } from "../../store/apiSlices/categoriesApi";
 import { Close } from "@mui/icons-material";
 
 // Modal style
@@ -57,7 +53,6 @@ const style = {
 const AddTasks = () => {
 	const path_name = window.location.pathname;
 
-	const dispatch = useDispatch(true);
 	const { error } = useSelector((state) => state.CategoriesSlice);
 
 	const navigate = useNavigate();
@@ -116,22 +111,14 @@ const AddTasks = () => {
 	};
 
 	// Handle profile data
-	const [addNewTasks] = useAddNewTasksMutation();
+	const [addNewTasks] = useAddNewCategoryMutation();
 	const handleCreateNewTasks = async (data) => {
-		setLoadingTitle(
-			path_name.includes("add-service-Tasks")
-				? "جاري اضافة نشاط الخدمات"
-				: "جاري اضافة نشاط المنتجات"
-		);
+		setLoadingTitle("جاري اضافة مهمة جديدة");
 
 		resetTasksError();
 
 		const formData = new FormData();
 		formData.append("name", data?.name);
-
-		if (path_name.includes("add-service-Tasks")) {
-			formData.append("is_service", 1);
-		}
 
 		if (icons?.length > 0) {
 			formData.append("icon", icons[0]?.file);
@@ -390,21 +377,6 @@ const AddTasks = () => {
 													</div>
 												)
 										)}
-
-									<div className='row mb-md-5 mb-3'>
-										<div className='col-md-3 col-12'></div>
-										<div className='col-md-7 col-12'>
-											<button
-												type='button'
-												className='add-new-cate-btn w-100'
-												onClick={() => {
-													dispatch(openAddSubTasks());
-												}}>
-												<AiOutlinePlus />
-												<span className='me-2'>اضافة نشاط فرعي جديد</span>
-											</button>
-										</div>
-									</div>
 								</div>
 
 								<div className='form-footer'>
@@ -431,7 +403,6 @@ const AddTasks = () => {
 						</div>
 					</Box>
 				</Modal>
-				<AddSubTasks />
 			</div>
 		</>
 	);

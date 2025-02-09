@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useSelector, useDispatch } from "react-redux";
+
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import {
@@ -35,8 +35,6 @@ import {
 	useDeleteAllProductsMutation,
 	useDeleteProductMutation,
 } from "../../store/apiSlices/productsApi";
-import { openModal } from "../../store/slices/ChangeCategoriesForSomeSelectedProducts";
-import { ChangeCategoriesForSomeSelectedProducts } from "../../pages/Products";
 
 const switchStyle = {
 	width: "50px",
@@ -124,14 +122,7 @@ EnhancedTableHead.propTypes = {
 };
 
 function EnhancedTableToolbar(props) {
-	const {
-		itemsSelected,
-		numSelected,
-		rowCount,
-		onSelectAllClick,
-		handleOpenChangeCategoriesModal,
-		tabSelectedId,
-	} = props;
+	const { itemsSelected, numSelected, rowCount, onSelectAllClick } = props;
 	const NotificationStore = useContext(NotificationContext);
 	const { setNotificationTitle, setItems, setActionType } = NotificationStore;
 
@@ -176,15 +167,6 @@ function EnhancedTableToolbar(props) {
 								تعطيل الكل
 							</IconButton>
 						</Tooltip>
-						{tabSelectedId === 1 && (
-							<Tooltip>
-								<button
-									className='edit-all-categories-btn'
-									onClick={handleOpenChangeCategoriesModal}>
-									تعديل الأنشطة
-								</button>
-							</Tooltip>
-						)}
 					</div>
 				)}
 			</div>
@@ -235,11 +217,6 @@ export default function BigProductsTable({
 	pageCount,
 	currentPage,
 }) {
-	const { modalIsOpen } = useSelector(
-		(state) => state.ChangeCategoriesForSomeSelectedProductsSlice
-	);
-
-	const dispatch = useDispatch();
 	const NotificationStore = useContext(NotificationContext);
 	const { notificationTitle } = NotificationStore;
 	const contextStore = useContext(Context);
@@ -383,20 +360,9 @@ export default function BigProductsTable({
 		}
 	};
 
-	const handleOpenChangeCategoriesModal = () => {
-		dispatch(openModal());
-	};
-
 	return (
 		<>
 			<Box sx={{ width: "100%" }}>
-				{modalIsOpen && (
-					<ChangeCategoriesForSomeSelectedProducts
-						selected={selected}
-						setSelected={setSelected}
-					/>
-				)}
-
 				<Paper sx={{ width: "100%", mb: 2 }}>
 					<EnhancedTableToolbar
 						itemsSelected={selected}
@@ -404,7 +370,6 @@ export default function BigProductsTable({
 						tabSelectedId={tabSelectedId}
 						rowCount={products?.length}
 						onSelectAllClick={handleSelectAllClick}
-						handleOpenChangeCategoriesModal={handleOpenChangeCategoriesModal}
 					/>
 
 					<TableContainer>

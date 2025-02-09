@@ -52,7 +52,7 @@ const PackageData = ({ item }) => {
 
 	// navigate to register
 	const handleSelectPackageId = (id) => {
-		navigate("/auth/merchant");
+		navigate("/auth/register_company");
 		localStorage.setItem("package_id", id);
 	};
 

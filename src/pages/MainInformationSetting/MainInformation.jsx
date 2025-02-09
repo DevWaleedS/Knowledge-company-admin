@@ -146,7 +146,7 @@ const MainInformation = () => {
 	const [updateStoreMainInformation] = useUpdateStoreMainInformationMutation();
 	const handleUpdateStoreMainInformation = async () => {
 		resetSettingError();
-		setLoadingTitle("جاري تعديل بيانات المتجر الأساسية");
+		setLoadingTitle("جاري تعديل بيانات المنصة الأساسية");
 
 		// data that send to api...
 		let formData = new FormData();

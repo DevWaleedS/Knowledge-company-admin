@@ -11,13 +11,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 
-// Redux
-import { useDispatch } from "react-redux";
-import { openAddSubTasks } from "../../store/slices/AddSubTasks-slice";
-
-// Components
-import AddSubTasks from "../nestedPages/AddSubTasks";
-
 // Helpers
 import { CircularLoading } from "../../HelperComponents";
 
@@ -29,8 +22,8 @@ import { DeleteIcon, UploadIcon } from "../../data/Icons";
 import Context from "../../Context/context";
 import { LoadingContext } from "../../Context/LoadingProvider";
 import {
-	useEditTasksByIdMutation,
-	useGetTasksByIdQuery,
+	useEditCategoryByIdMutation,
+	useGetCategoryByIdQuery,
 } from "../../store/apiSlices/categoriesApi";
 import { Close } from "@mui/icons-material";
 
@@ -58,19 +51,18 @@ const style = {
 	},
 };
 
-const EditTasks = () => {
-	// get Tasks by is
+const EditTask = () => {
+	// get category by is
 	const { id } = useParams();
 	const path_name = window.location.pathname;
-	const { data: currentTasks, isFetching } = useGetTasksByIdQuery(id);
+	const { data: currentCategory, isFetching } = useGetCategoryByIdQuery(id);
 
-	const dispatch = useDispatch(true);
 	const navigate = useNavigate();
 	const contextStore = useContext(Context);
 	const { subCategories, setSubCategories } = contextStore;
 	const LoadingStore = useContext(LoadingContext);
 	const { setLoadingTitle } = LoadingStore;
-	const [Tasks, setTasks] = useState({
+	const [category, setCategory] = useState({
 		name: "",
 	});
 	const {
@@ -85,7 +77,7 @@ const EditTasks = () => {
 		},
 	});
 
-	const [TasksError, setTasksError] = useState({
+	const [categoryError, setCategoryError] = useState({
 		name: "",
 		icon: "",
 	});
@@ -106,41 +98,41 @@ const EditTasks = () => {
 			toast.warning(errorMessage, {
 				theme: "light",
 			});
-			setTasksError({
-				...TasksError,
+			setCategoryError({
+				...categoryError,
 				icon: errorMessage,
 			});
 		} else {
 			setIcons(imageList);
-			setTasksError({ ...TasksError, icon: null });
+			setCategoryError({ ...categoryError, icon: null });
 		}
 	};
 
 	/** to get all data from api */
 	useEffect(() => {
-		setTasks({
-			...Tasks,
-			name: currentTasks?.categories?.name,
+		setCategory({
+			...category,
+			name: currentCategory?.categories?.name,
 		});
-	}, [currentTasks?.categories]);
+	}, [currentCategory?.categories, category]);
 
 	// to update the categories if any item is change
 	useEffect(() => {
-		reset(Tasks);
-	}, [Tasks, reset]);
+		reset(category);
+	}, [category, reset]);
 
-	// handle edit current Tasks by id
-	const [editTasksById] = useEditTasksByIdMutation();
-	const handleUpdateTasks = async (data) => {
+	// handle edit current Category by id
+	const [editCategoryById] = useEditCategoryByIdMutation();
+	const handleUpdateCategory = async (data) => {
 		setLoadingTitle(
-			path_name.includes("edit-service-Tasks")
+			path_name.includes("edit-service-category")
 				? "جاري تعديل نشاط الخدمات"
 				: "جاري تعديل نشاط المنتجات"
 		);
 		let formData = new FormData();
 		formData.append("_method", "PUT");
 		formData.append("name", data?.name);
-		if (path_name.includes("edit-service-Tasks")) {
+		if (path_name.includes("edit-service-category")) {
 			formData.append("is_service", 1);
 		}
 
@@ -148,17 +140,17 @@ const EditTasks = () => {
 			formData.append("icon", icons[0]?.file);
 		}
 
-		subCategories.forEach((subTasks, index) => {
-			if (subTasks?.name) {
-				formData.append(`data[${index}][name]`, subTasks.name);
+		subCategories.forEach((subCategory, index) => {
+			if (subCategory?.name) {
+				formData.append(`data[${index}][name]`, subCategory.name);
 				formData.append([`data[${index}][id]`], subCategories[index]?.id || "");
 			}
 		});
 
 		// making request...
 		try {
-			const response = await editTasksById({
-				id: currentTasks?.categories?.id,
+			const response = await editCategoryById({
+				id: currentCategory?.categories?.id,
 				body: formData,
 			});
 
@@ -168,13 +160,13 @@ const EditTasks = () => {
 				response.data?.data?.status === 200
 			) {
 				setLoadingTitle("");
-				navigate("/Tasks");
+				navigate("/Category");
 				setSubCategories([]);
 			} else {
 				setLoadingTitle("");
 
-				setTasksError({
-					...TasksError,
+				setCategoryError({
+					...categoryError,
 					name: response?.data?.message?.en?.name?.[0],
 					icon: response?.res?.data?.message?.en?.name?.[0],
 				});
@@ -200,7 +192,7 @@ const EditTasks = () => {
 		}
 	};
 
-	/** to edit the sub Tasks */
+	/** to edit the sub category */
 	const updateSubCatChanged = (e, index) => {
 		const newArray = subCategories?.map((item, i) => {
 			if (index === i) {
@@ -214,26 +206,30 @@ const EditTasks = () => {
 
 	/** to get all sub categories  */
 	useEffect(() => {
-		if (currentTasks?.categories) {
-			for (let i = 0; i < currentTasks?.categories?.subTasks?.length; i++) {
+		if (currentCategory?.categories) {
+			for (
+				let i = 0;
+				i < currentCategory?.categories?.subcategory?.length;
+				i++
+			) {
 				setSubCategories((subCategories) => [
 					...subCategories,
 					{
-						id: currentTasks?.categories?.subTasks[i]?.id,
-						name: currentTasks?.categories?.subTasks[i]?.name,
+						id: currentCategory?.categories?.subcategory[i]?.id,
+						name: currentCategory?.categories?.subcategory[i]?.name,
 					},
 				]);
 			}
-			setIcons([currentTasks?.categories?.icon]);
+			setIcons([currentCategory?.categories?.icon]);
 		}
-	}, [currentTasks?.categories]);
+	}, [currentCategory?.categories, setSubCategories]);
 
 	return (
 		<>
 			<Helmet>
 				<title>
 					{`لوحة تحكم المعرفة  |	${
-						path_name.includes("edit-service-Tasks")
+						path_name.includes("edit-service-category")
 							? "تعديل نشاط الخدمات"
 							: "تعديل نشاط المنتجات"
 					}   	 `}
@@ -244,7 +240,7 @@ const EditTasks = () => {
 					open={true}
 					onClose={() => {
 						setSubCategories([]);
-						navigate("/Tasks");
+						navigate("/Category");
 					}}
 					aria-labelledby='modal-modal-title'
 					aria-describedby='modal-modal-description'>
@@ -255,7 +251,7 @@ const EditTasks = () => {
 									<div className='form-title'>
 										<h5 className='mb-3'>
 											{" "}
-											{path_name.includes("edit-service-Tasks")
+											{path_name.includes("edit-service-category")
 												? "تعديل نشاط الخدمات"
 												: "تعديل نشاط المنتجات"}{" "}
 										</h5>
@@ -274,7 +270,7 @@ const EditTasks = () => {
 							) : (
 								<form
 									className='form-h-full'
-									onSubmit={handleSubmit(handleUpdateTasks)}>
+									onSubmit={handleSubmit(handleUpdateCategory)}>
 									<div className='form-body'>
 										<div className='row mb-md-5 mb-3'>
 											<div className='col-md-3 col-12'>
@@ -342,18 +338,18 @@ const EditTasks = () => {
 											</div>
 											<div className='col-md-3 col-12'></div>
 											<div className='col-md-7 col-12'>
-												{TasksError?.icon && (
+												{categoryError?.icon && (
 													<span className='fs-6 text-danger'>
-														{TasksError?.icon}
+														{categoryError?.icon}
 													</span>
 												)}
 											</div>
 										</div>
 										<div className='row mb-md-5 mb-3'>
 											<div className='col-md-3 col-12'>
-												<label htmlFor='Tasks-name'>
+												<label htmlFor='category-name'>
 													{" "}
-													{path_name.includes("edit-service-Tasks")
+													{path_name.includes("edit-service-category")
 														? "اسم نشاط الخدمة الرئيسي"
 														: "اسم نشاط المنتج الرئيسي"}
 													<span className='important-hint'>*</span>
@@ -362,7 +358,7 @@ const EditTasks = () => {
 											<div className='col-md-7 col-12'>
 												<input
 													type='text'
-													id='Tasks-name'
+													id='category-name'
 													placeholder='أدخل اسم النشاط الرئيسي'
 													name='name'
 													{...register("name", {
@@ -378,19 +374,19 @@ const EditTasks = () => {
 											<div className='col-md-3 col-12'></div>
 											<div className='col-md-7 col-12'>
 												<span className='fs-6 text-danger'>
-													{TasksError?.name}
+													{categoryError?.name}
 													{errors?.name && errors.name.message}
 												</span>
 											</div>
 										</div>
 										{subCategories &&
 											subCategories.map(
-												(subTasks, index) =>
-													subTasks?.name && (
+												(subCategory, index) =>
+													subCategory?.name && (
 														<div className='row mb-md-5 mb-3' key={index}>
 															<div className='col-md-3 col-12'>
 																<label
-																	htmlFor='Tasks-name'
+																	htmlFor='category-name'
 																	style={{
 																		color: "#1DBBBE",
 																	}}>
@@ -401,8 +397,8 @@ const EditTasks = () => {
 																<input
 																	className='flex-1'
 																	type='text'
-																	id='Tasks-name'
-																	value={subTasks?.name}
+																	id='category-name'
+																	value={subCategory?.name}
 																	onChange={(e) =>
 																		updateSubCatChanged(e, index)
 																	}
@@ -415,7 +411,7 @@ const EditTasks = () => {
 																	onClick={() => {
 																		setSubCategories((subCategories) => [
 																			...subCategories.filter(
-																				(sub) => sub?.name !== subTasks?.name
+																				(sub) => sub?.name !== subCategory?.name
 																			),
 																		]);
 																	}}
@@ -429,21 +425,6 @@ const EditTasks = () => {
 														</div>
 													)
 											)}
-
-										<div className='row mb-md-5 mb-3'>
-											<div className='col-md-3 col-12'></div>
-											<div className='col-md-7 col-12'>
-												<button
-													type='button'
-													className='add-new-cate-btn w-100'
-													onClick={() => {
-														dispatch(openAddSubTasks());
-													}}>
-													<AiOutlinePlus />
-													<span className='me-2'>اضافة نشاط فرعي جديد</span>
-												</button>
-											</div>
-										</div>
 									</div>
 
 									<div className='form-footer'>
@@ -458,7 +439,7 @@ const EditTasks = () => {
 													type='button'
 													className='close-btn'
 													onClick={() => {
-														navigate("/Tasks");
+														navigate("/Category");
 														setSubCategories([]);
 													}}>
 													إلغاء
@@ -471,10 +452,9 @@ const EditTasks = () => {
 						</div>
 					</Box>
 				</Modal>
-				<AddSubTasks />
 			</div>
 		</>
 	);
 };
 
-export default EditTasks;
+export default EditTask;

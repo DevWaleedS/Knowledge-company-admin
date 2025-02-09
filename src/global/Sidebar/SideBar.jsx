@@ -1,14 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Sidebar, Menu } from "react-pro-sidebar";
 
 // Redux
 import { useDispatch } from "react-redux";
 import { openVerifyModal } from "../../store/slices/VerifyStoreModal-slice";
-import { openMaintenanceModeModal } from "../../store/slices/MaintenanceModeModal";
-import { openDelegateRequestAlert } from "../../store/slices/DelegateRequestAlert-slice";
 
-// Context
-import Context from "../../Context/context";
+import { openDelegateRequestAlert } from "../../store/slices/DelegateRequestAlert-slice";
 
 // Side bar components
 import SidebarLink from "./SidebarLink";
@@ -17,38 +14,28 @@ import SidebarSubMenu from "./SidebarSubMenu";
 // Icons
 import {
 	Academy,
-	BsCart,
-	Category,
 	Delevray,
-	Discoint,
 	Evaluation,
-	Eye,
-	HomeImage,
 	Info,
-	Layout,
-	Marketing,
 	Orders,
 	PagesIcon,
-	Paint,
 	Payment,
 	Products,
 	Rating,
 	Reports,
 	Services,
 	Setting,
-	Shoping,
-	Social,
 	Support,
 	Template,
 	Verification,
 } from "../../data/Icons";
-import { FaCrown } from "react-icons/fa6";
+
+import { FaCrown, FaUsersGear } from "react-icons/fa6";
 import { BsCartX } from "react-icons/bs";
 import { MdVerified } from "react-icons/md";
 import { IoWallet } from "react-icons/io5";
 import { BiCartAdd, BiSolidRocket } from "react-icons/bi";
-import { FaCircle, FaUserCheck } from "react-icons/fa";
-import MarkEmailReadIcon from "@mui/icons-material/MarkEmailRead";
+import { FaCircle, FaTasks, FaUserCheck, FaHome } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useGetUpgradePackagesQuery } from "../../store/apiSlices/upgradePackagesApi";
 
@@ -61,8 +48,6 @@ const SideBar = ({
 }) => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const Z_index = useContext(Context);
-	const { setNavbarZindex } = Z_index;
 
 	const { data: upgradePackages, isLoading: loadingPackages } =
 		useGetUpgradePackagesQuery();
@@ -85,12 +70,6 @@ const SideBar = ({
 		dispatch(openVerifyModal());
 	};
 
-	// handle  Open Maintenance Mode Modal
-	const handleOpenMaintenanceModeModal = () => {
-		setNavbarZindex(true);
-		dispatch(openMaintenanceModeModal());
-	};
-
 	// sub menu items
 	const submenuItems = {
 		orders: [
@@ -98,53 +77,22 @@ const SideBar = ({
 			{ to: "ReturnOrders", icon: BsCartX, label: "المرتجعات" },
 		],
 
-		marketing: [
-			{ to: "Coupon", icon: Discoint, label: "أكواد الخصم" },
-			{ to: "EmptyCarts", icon: BsCart, label: "السلات المتروكة" },
-			// { to: "EmptyCarts", icon: Offer, label: "  العروض الخاصة" },
-			{
-				href: "https://celebrity.sa/",
-				target: "_blank",
-				rel: "noreferrer",
-				icon: Shoping,
-				label: "التسويق عبر المشاهير",
-			},
-			{
-				to: "PostalSubscriptions",
-				icon: MarkEmailReadIcon,
-				label: "الاشتراكات البريدية",
-			},
-			{ to: "seo_store_setting", icon: FaCircle, label: "SEO المتجر" },
-		],
-
-		template: [
-			{ to: "Template", icon: Layout, label: "تنسيق القالب" },
-			{ to: "PaintStore", icon: Paint, label: "هوية المتجر" },
-		],
-
 		storeInfo: [
 			{
 				to: "Home",
 				icon: Verification,
-				label: "توثيق المتجر",
+				label: "توثيق الشركة",
 				isVerifyStoreModal: handleOpenVerificationStatus,
 			},
-			{ to: "SocialPages", icon: Social, label: "صفحات التواصل" },
 		],
 
 		setting: [
 			{
 				to: "MainInformation",
 				icon: FaCircle,
-				label: "إعدادت المتجر الأساسية",
+				label: "إعدادت النظام الأساسية",
 			},
-			{
-				to: "Home",
-				icon: FaCircle,
-				label: "وضع الصيانة",
-				isMaintenanceModeModal: handleOpenMaintenanceModeModal,
-			},
-			// { to: "Management", icon: FaCircle, label: "الإدارة و المستخدمين " },
+
 			{ to: "Notifications", icon: FaCircle, label: "الإشعارات" },
 		],
 	};
@@ -158,7 +106,7 @@ const SideBar = ({
 				{verificationStatus === "تم التوثيق" && (
 					<div className='verify_box d-flex justify-content-center align-content-center gap-1 '>
 						<MdVerified className='verify_icon' />
-						<p className='mb-0 pb-0'>متجر موثق</p>
+						<p className='mb-0 pb-0'>شركة موثقة</p>
 					</div>
 				)}
 
@@ -181,37 +129,28 @@ const SideBar = ({
 				)}
 			</div>
 			<Menu>
-				{selectedPackage ? (
-					<SidebarLink
-						href={`https://${localStorage.getItem("domain")}`}
-						target='_blank'
-						rel='noreferrer'
-						icon={Eye}
-						label='عرض المتجر'
-					/>
-				) : (
-					<SidebarLink
-						to='Home'
-						icon={Eye}
-						label='عرض المتجر'
-						className='menu-link'
-						onClick={() => {
-							closeSidebar();
-							handleOpenVerificationModal();
-						}}
-					/>
-				)}
 				<SidebarLink
 					to=''
-					icon={HomeImage}
+					icon={FaHome}
 					label='الرئيسية'
 					className='menu-link'
 					onClick={closeSidebar}
 				/>
 				<SidebarLink
-					to='Category'
-					icon={Category}
-					label='الأنشطة'
+					to='tasks'
+					icon={FaTasks}
+					label='إدارة المهام'
+					className='menu-link'
+					onClick={() => {
+						closeSidebar();
+						handleOpenVerificationModal();
+					}}
+				/>
+
+				<SidebarLink
+					to='employees'
+					icon={FaUsersGear}
+					label=' إدارة الموظفين'
 					className='menu-link'
 					onClick={() => {
 						closeSidebar();
@@ -245,15 +184,7 @@ const SideBar = ({
 						handleOpenVerificationModal();
 					}}
 				/>
-				{/** marketing Sub menu */}
-				<SidebarSubMenu
-					label='التسويق'
-					icon={Marketing}
-					items={submenuItems.marketing}
-					onClose={closeSidebar}
-					href={submenuItems.marketing.href}
-					onVerify={handleOpenVerificationModal}
-				/>
+
 				<SidebarLink
 					to='Rating'
 					icon={Rating}

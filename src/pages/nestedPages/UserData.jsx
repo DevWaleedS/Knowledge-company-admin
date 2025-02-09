@@ -72,7 +72,7 @@ const UserData = () => {
 			<div className='add-category-form' open={true}>
 				<Modal
 					open={true}
-					onClose={() => navigate("/Management")}
+					onClose={() => navigate("/employees")}
 					aria-labelledby='modal-modal-title'
 					aria-describedby='modal-modal-description'>
 					<Box component={"div"} sx={style}>
@@ -231,7 +231,7 @@ const UserData = () => {
 												<div className='col-6'>
 													<button
 														className='close-btn'
-														onClick={() => navigate("/Management")}>
+														onClick={() => navigate("/employees")}>
 														إلغاء
 													</button>
 												</div>

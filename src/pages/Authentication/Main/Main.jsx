@@ -9,8 +9,7 @@ import Tabs from "../Tabs/Tabs";
 import Login from "../Login/Login";
 import Loading from "../../Loading/Loading";
 import LogoHeader from "../LogoHeader/LogoHeader";
-import RegisterStore from "../RegisterStore/RegisterStore";
-import RegisterDelegate from "../RegisterDelegate/RegisterDelegate";
+import RegisterCompany from "../RegisterCompany/RegisterCompany";
 
 // Icons
 import { SvgComponent } from "../../../data/Icons";
@@ -25,16 +24,16 @@ import "./Main.css";
 // -------------------------------------------------
 const mainTitle = [
 	{ id: 1, text: "قم بتسجيل الدخول إلى حسابك" },
-	{ id: 2, text: "أنشئ حسابك واستمتع بالتجارة الإلكترونية" },
-	{ id: 3, text: "أنشئ حسابك واستمتع بالتجارة الإلكترونية" },
+	{ id: 2, text: "أنشئ حسابك واستمتع بادارة فريقك عن بعد" },
+	{ id: 3, text: "أنشئ حسابك واستمتع بادارة فريقك عن بعد" },
 ];
 const imgTitle = [
 	{ id: 1, text: "مرحباً بعودتك" },
-	{ id: 2, text: "منصة المعرفة" },
-	{ id: 3, text: "منصة المعرفة" },
+	{ id: 2, text: "شركة المعرفة" },
+	{ id: 3, text: "شركة المعرفة" },
 ];
 const imgSubTitle = [
-	{ id: 1, text: "منصة المعرفة للعمل عن بُعد " },
+	{ id: 1, text: "شركة المعرفة البرمجية لتقنية المعلومات" },
 	{ id: 2, text: "معنى جديد للعمل عن بُعد" },
 	{ id: 3, text: "معنى جديد للعمل عن بُعد" },
 ];
@@ -74,13 +73,13 @@ function Main() {
 	useEffect(() => {
 		if (
 			parm?.type === "login" ||
-			parm?.type === "merchant" ||
+			parm?.type === "register_company" ||
 			parm?.type === "delegate"
 		) {
 			setActiveTab(
 				parm?.type === "login"
 					? 0
-					: parm?.type === "merchant"
+					: parm?.type === "register_company"
 					? 1
 					: parm?.type === "delegate" && registrationMarketerStatus === "active"
 					? 2
@@ -120,10 +119,8 @@ function Main() {
 							{activeTab === 0 ? (
 								<Login />
 							) : activeTab === 1 ? (
-								<RegisterStore />
-							) : (
-								<RegisterDelegate />
-							)}
+								<RegisterCompany />
+							) : null}
 						</div>
 					</div>
 

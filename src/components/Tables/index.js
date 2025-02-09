@@ -1,14 +1,12 @@
 export { default as PagesTable } from "./PagesTable";
-export { default as CouponTable } from "./CouponTable";
+export { default as TasksTable } from "./TasksTable";
 export { default as CartsTables } from "./CartsTables";
 export { default as SupportTable } from "./SupportTable";
 export { default as BillingTable } from "./BigOrdersTable";
 export { default as DelegateTable } from "./DelegateTable";
-export { default as CategoryTable } from "./CategoryTable";
 export { default as BigOrdersTable } from "./BigOrdersTable";
 export { default as OrdersTableData } from "./OrdersTableData";
 export { default as BigProductsTable } from "./BigProductsTable";
-export { default as ReturnOrdersTable } from "./ReturnOrdersTable";
+
 export { default as ProductsTableData } from "./ProductsTableData";
-export { default as UserAndManagementTable } from "./UserAndManagementTable";
-export { default as PostalSubscriptionsTable } from "./PostalSubscriptionsTable";
+export { default as EmployeesTable } from "./EmployeesTable";

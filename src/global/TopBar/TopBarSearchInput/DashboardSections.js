@@ -307,12 +307,7 @@ export const dashboardSections = [
 		route: "",
 		icon: <FaCircle style={{ width: "14px" }} />,
 	},
-	// {
-	// 	id: 28,
-	// 	sectionName: "الإدارة و المستخدمين",
-	// 	route: "Management",
-	// 	icon: <FaCircle style={{ width: "14px" }} />,
-	// },
+
 	{
 		id: 29,
 		sectionName: "الإشعارات",

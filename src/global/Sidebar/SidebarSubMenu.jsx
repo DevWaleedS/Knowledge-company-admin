@@ -16,11 +16,6 @@ const SidebarSubMenu = ({ label, icon: Icon, items, onClose, onVerify }) => {
 						onClose();
 						onVerify();
 
-						// to handle open maintenance mode modal
-						if (item.isMaintenanceModeModal) {
-							item.isMaintenanceModeModal();
-						}
-
 						// to handle open verify store modal
 						if (item.isVerifyStoreModal) {
 							item.isVerifyStoreModal();

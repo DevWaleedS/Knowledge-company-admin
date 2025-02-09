@@ -24,18 +24,17 @@ import RootLayout from "./pages/RootLayout";
 import "./index.css";
 
 import {
-	Offers,
-	// Management,
-	SocialPages,
-	//MarketingCampaign,
-	//BranchesAndWarehouses,
 	Notifications,
 	PlatformServices,
 	EvaluationThePlatform,
-	PostalSubscriptions,
-	PaintStore,
-	RequestDelegate,
 	SEOStoreSetting,
+	Employees,
+	EmployeeDetails,
+	AddNewEmployee,
+	EditEmployee,
+	JobRoles,
+	CreateRole,
+	EditRole,
 } from "./pages";
 
 // rating and comments of store
@@ -47,35 +46,14 @@ import { CourseDetails } from "./pages/Academy/Courses";
 import { ExplainDetails } from "./pages/Academy/Explains";
 
 // Products Pages ...
-import {
-	AddNewProduct,
-	EditImportProducts,
-	EditProduct,
-	Products,
-} from "./pages/Products";
+import { Products } from "./pages/Products";
 
 import { ErrorPage } from "./pages/ErrorPage";
 import { VerifyStore } from "./pages/VerifyStore";
-import { TemplateSetting } from "./pages/TemplateSetting";
-import { ShippingCompanies } from "./pages/ShippingCompanies";
+
 import { DashboardHomePage } from "./pages/DashboardHomePage";
 import { PaymentGateways } from "./pages/PaymentGateways";
 // ---------------------------------------------------------------------------------------//
-
-// Import Nested Pages
-import {
-	EditUserPage,
-	JobTitles,
-	EditRole,
-	UserData,
-	CreateRole,
-	AddNewUser,
-	EditUserDetails,
-
-	// CreateOffer,
-
-	// OfferDetails,
-} from "./pages/nestedPages";
 
 // ---------------------------------------------------------------------------------------//
 
@@ -109,21 +87,12 @@ import SendVerificationCode from "./pages/Authentication/Login/ResetPasswordPage
 import LogInVerificationCode from "./pages/Authentication/Login/ResetPasswordPages/SendVerificationCode/LogInVerificationCode/LogInVerificationCode";
 import VerificationPage from "./pages/Authentication/VerificationPage/VerificationPage";
 
-// categories
-import { Category, AddCategory, EditCategory } from "./pages/Categories";
+// tasks
+import { AddTask, Tasks, EditTask } from "./pages/tasks";
 
 // Technical Support
 import { TechnicalSupport } from "./pages/TechnicalSupport";
 import TechnicalSupportDetails from "./pages/TechnicalSupport/TechnicalSupportDetails";
-
-// coupons
-import { Coupon, AddCoupon, EditCoupon } from "./pages/Coupon";
-
-// empty carts
-import { EditEmptyCart, EmptyCarts } from "./pages/EmptyCarts";
-
-// store pages
-import { CreatePage, EditPage, Pages } from "./pages/StorePages";
 
 // wallet and billing
 import { Wallet } from "./pages/Wallet";
@@ -132,21 +101,12 @@ import BillingInfo from "./pages/Wallet/BillingInfo";
 // reports
 import { Reports } from "./pages/Reports";
 
-/** Store orders and return orders */
-import { OrderDetails, Orders } from "./pages/StoreOrders/Orders";
-import {
-	ReturnOrderDetails,
-	ReturnOrders,
-} from "./pages/StoreOrders/ReturnOrders";
-
 // packages
 import UpgradePackages from "./pages/Packages/UpgradePackages";
 import ComparePackages from "./pages/Packages/ComparePackages";
 import CheckoutPackages from "./pages/Packages/CheckoutPackages/CheckoutPackages";
 import LiveCourseDetails from "./pages/Academy/LiveCourses/LiveCourseDetails";
 import CheckoutServicesStatus from "./pages/PlatformServices/CheckoutServices/CheckoutServicesStatus";
-import AddNewService from "./pages/Products/AddAndEditServices/AddNewService";
-import EditService from "./pages/Products/AddAndEditServices/EditService";
 
 /**
  * ----------------------------------------------------------------------------------------------
@@ -216,146 +176,26 @@ const router = createBrowserRouter([
 			},
 
 			{
-				path: "Category",
-				element: <Category />,
-			},
-			// Add Category page nested page for Category page
-			{
-				path: "Category/AddCategory",
-				element: <AddCategory />,
+				path: "tasks",
+				element: <Tasks />,
 			},
 
 			{
-				path: "Category/add-service-category",
-				element: <AddCategory />,
+				path: "tasks/Add-task",
+				element: <AddTask />,
 			},
 
 			// Category details page nested page for Category page
 			{
-				path: "Category/EditCategory/:id",
-				element: <EditCategory />,
-			},
-
-			// Category details page nested page for Category page
-			{
-				path: "Category/edit-service-category/:id",
-				element: <EditCategory />,
-			},
-			{
-				path: "Coupon",
-				element: <Coupon />,
-			},
-			// Add Coupon page nested page for Coupon page
-			{
-				path: "Coupon/AddCoupon",
-				element: <AddCoupon />,
-			},
-			// Coupon details page nested page for Coupon page
-			{
-				path: "Coupon/EditCoupon/:id",
-				element: <EditCoupon />,
-			},
-			{
-				path: "Offers",
-				element: <Offers />,
-			},
-			// nested Add Offer page
-			// {
-			// 	path: 'Offers/AddOffer',
-			// 	element: <CreateOffer />,
-			// },
-			// {
-			// 	path: 'Offers/OfferDetails/:id',
-			// 	element: <OfferDetails />,
-			// },
-			{
-				path: "EmptyCarts",
-				element: <EmptyCarts />,
-			},
-
-			// EditEmptyCart page nested page for Carts page
-			{
-				path: "EmptyCarts/EditEmptyCart/:id",
-				element: <EditEmptyCart />,
-			},
-
-			{
-				path: "PostalSubscriptions",
-				element: <PostalSubscriptions />,
-			},
-			// {
-			// 	path: "MarketingCampaign",
-			// 	element: <MarketingCampaign />,
-			// },
-
-			/** Store orders and return orders */
-			{
-				path: "Orders",
-				element: <Orders />,
-			},
-
-			// nested order page
-			{
-				path: "Orders/OrderDetails/:id",
-				element: <OrderDetails />,
-			},
-
-			{
-				path: "ReturnOrders",
-				element: <ReturnOrders />,
-			},
-
-			{
-				path: "ReturnOrders/ReturnOrderDetails/:id",
-				element: <ReturnOrderDetails />,
-			},
-
-			/** Store Pages  */
-			{
-				path: "Pages",
-				element: <Pages />,
-			},
-			// nested order page
-			{
-				path: "Pages/AddPage",
-				element: <CreatePage />,
-			},
-			{
-				path: "Pages/EditPage/:id",
-				element: <EditPage />,
+				path: "tasks/edit-task/:id",
+				element: <EditTask />,
 			},
 
 			{
 				path: "Products",
 				element: <Products />,
 			},
-			// nested Add Product Page
-			{
-				path: "Products/AddProduct",
-				element: <AddNewProduct />,
-			},
-			// nested Edit Product Page
-			{
-				path: "Products/EditProduct/:id",
-				element: <EditProduct />,
-			},
-			// add and edit services
-			{
-				path: "Products/add-service",
-				element: <AddNewService />,
-			},
 
-			{
-				path: "Products/edit-service/:id",
-				element: <EditService />,
-			},
-
-			// EditImportProducts page
-			{
-				path: "Products/EditImportProducts/:id",
-				element: <EditImportProducts />,
-			},
-			// nested SouqOtlobha Page
 			{
 				path: "Products/SouqOtlobha",
 				element: <SouqOtlobha />,
@@ -428,56 +268,34 @@ const router = createBrowserRouter([
 				path: "MainInformation",
 				element: <MainInformation />,
 			},
-			// {
-			// 	path: "Management",
-			// 	element: <Management />,
-			// },
-			// // nested add user page
-			// {
-			// 	path: "Management/AddUser",
-			// 	element: <AddNewUser />,
-			// },
-			// // nested add users page
-			// {
-			// 	path: "Management/user/:id",
-			// 	element: <EditUserPage />,
-			// },
-			// // nested add users page
-			// {
-			// 	path: "Management/info/:id",
-			// 	element: <UserData />,
-			// },
-
-			// Nested EditUserDetails
 			{
-				path: "EditUserDetails",
-				element: <EditUserDetails />,
+				path: "employees",
+				element: <Employees />,
 			},
 
-			// nested job title page
-			// {
-			// 	path: "Management/JobTitles",
-			// 	element: <JobTitles />,
-			// },
-			// // nested job title page
-			// {
-			// 	path: "Management/JobTitles/EditRole/:id",
-			// 	element: <EditRole />,
-			// },
+			{
+				path: "employees/add-new-employee",
+				element: <AddNewEmployee />,
+			},
+			// nested add users page
+			{
+				path: "employees/edit-employee/:id",
+				element: <EditEmployee />,
+			},
 
-			// // CreateRole page
-			// {
-			// 	path: "Management/JobTitles/CreateRole",
-			// 	element: <CreateRole />,
-			// },
+			{
+				path: "employees/employee-details/:id",
+				element: <EmployeeDetails />,
+			},
+
+			// Roles
+			{ path: "employees/roles", element: <JobRoles /> },
+			{ path: "employees/create-new-role", element: <CreateRole /> },
+			{ path: "employees/edit-role/:id", element: <EditRole /> },
 
 			{
 				path: "VerifyStore",
 				element: <VerifyStore />,
-			},
-			{
-				path: "SocialPages",
-				element: <SocialPages />,
 			},
 
 			// packages
@@ -493,10 +311,6 @@ const router = createBrowserRouter([
 			},
 
 			{
-				path: "ShippingCompanies",
-				element: <ShippingCompanies />,
-			},
-			{
 				path: "PaymentGateways",
 				element: <PaymentGateways />,
 			},
@@ -505,20 +319,11 @@ const router = createBrowserRouter([
 				element: <Wallet />,
 			},
 
-			// Billing Info
-
 			{
 				path: "wallet/billingInfo/:id",
 				element: <BillingInfo />,
 			},
-			{
-				path: "Template",
-				element: <TemplateSetting />,
-			},
-			{
-				path: "PaintStore",
-				element: <PaintStore />,
-			},
+
 			{
 				path: "Reports",
 				element: <Reports />,
@@ -532,10 +337,6 @@ const router = createBrowserRouter([
 				element: <PlatformServices />,
 			},
 
-			{
-				path: "/RequestDelegate",
-				element: <RequestDelegate />,
-			},
 			{
 				path: "EvaluationThePlatform",
 				element: <EvaluationThePlatform />,

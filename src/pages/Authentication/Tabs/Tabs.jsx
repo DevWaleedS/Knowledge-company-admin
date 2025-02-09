@@ -1,16 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-function Tabs({ activeTab, setActiveTab, registration_marketer }) {
+function Tabs({ activeTab, setActiveTab }) {
 	const tabs = [
 		{ id: 1, text: "تسجيل الدخول", link: "login", status: "active" },
-		{ id: 2, text: "تسجيل تاجر", link: "merchant", status: "active" },
-		{
-			id: 3,
-			text: "تسجيل مندوب",
-			link: "delegate",
-			status: registration_marketer,
-		},
+		{ id: 2, text: "تسجيل شركة", link: "register_company", status: "active" },
 	];
 	const navigate = useNavigate();
 	return (

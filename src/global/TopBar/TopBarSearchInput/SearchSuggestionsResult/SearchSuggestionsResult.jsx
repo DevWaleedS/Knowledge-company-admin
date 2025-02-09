@@ -10,7 +10,7 @@ import Context from "../../../../Context/context";
 // Redux
 import { useDispatch } from "react-redux";
 import { openVerifyModal } from "../../../../store/slices/VerifyStoreModal-slice";
-import { openMaintenanceModeModal } from "../../../../store/slices/MaintenanceModeModal";
+
 import { openDelegateRequestAlert } from "../../../../store/slices/DelegateRequestAlert-slice";
 import { openProductHintModal } from "../../../../store/slices/ImportProductHintModal";
 
@@ -20,12 +20,8 @@ const SearchSuggestionsResult = ({
 	setSearch,
 }) => {
 	const navigate = useNavigate();
-	// To change z-index of navbar when maintain mode is open
-	const Z_index = useContext(Context);
-	const { setNavbarZindex } = Z_index;
 	// -------------------------------------------------------
 
-	// to handle open openMaintenanceModeModal and  VerifyModal
 	const dispatch = useDispatch(false);
 	const dispatchVerifyModal = useDispatch(false);
 	// ---------------------------------------------------------
@@ -37,10 +33,7 @@ const SearchSuggestionsResult = ({
 
 	// to handle open all pages
 	const handleRoute = (item) => {
-		if (item?.sectionName === "وضع الصيانة") {
-			setNavbarZindex(true);
-			dispatch(openMaintenanceModeModal());
-		} else if (item?.sectionName === "توثيق المتجر") {
+		if (item?.sectionName === "توثيق المتجر") {
 			dispatchVerifyModal(openVerifyModal());
 		} else if (item?.sectionName === "الدورات التدريبية") {
 			navigate(`${item?.route}`);

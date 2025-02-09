@@ -39,7 +39,7 @@ const LogoHeader = () => {
 					</div>
 				) : (
 					<div className='box-logo' onClick={NavigateToHomePage}>
-						<LogoSvg />
+						Logo
 					</div>
 				)}
 			</div>

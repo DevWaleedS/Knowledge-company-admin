@@ -16,7 +16,7 @@ const PackagesTermsContent = ({ closeModal }) => {
 					<button className='back_btn' onClick={closeModal}>
 						<ArrowBack />
 					</button>
-					<h5 className='mb-0'>شروط باقة متجر الاعمال في منصة المعرفة</h5>
+					<h5 className='mb-0'>شروط باقة متجر الاعمال في شركة المعرفة</h5>
 				</div>
 				<div className='modal_content'>
 					<ul className='packages_condition__list'>

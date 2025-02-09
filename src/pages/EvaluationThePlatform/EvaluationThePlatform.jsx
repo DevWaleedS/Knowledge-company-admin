@@ -60,7 +60,7 @@ const EvaluationThePlatform = () => {
 		useAddEvaluationThePlatformApiMutation();
 
 	const handleAddEvaluationThePlatform = async () => {
-		setLoadingTitle("جاري اضافة تعليقك لمنصة المعرفة ");
+		setLoadingTitle("جاري اضافة تعليقك لشركة المعرفة ");
 		setEvaluationError("");
 
 		// data that send to api...
@@ -129,7 +129,7 @@ const EvaluationThePlatform = () => {
 						<div className='row mb-5'>
 							<div className='col-12'>
 								<div className='label d-flex align-items-center justify-content-center text-center'>
-									قم بتقييم تجربة استخدامك لمنصة المعرفة
+									قم بتقييم تجربة استخدامك لشركة المعرفة
 								</div>
 								<div className='evaluation-the-platform'>
 									<TextEditor
